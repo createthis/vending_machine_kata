@@ -1,14 +1,15 @@
 using System;
 using NUnit.Framework;
+using VendingMachine;
 
 namespace VendingMachine_Tests {
     [TestFixture]
     public class VendingMachineTests {
-        private VendingMachine vm;
+        private VendingMachine.VendingMachine vm;
 
         [SetUp]
         public void SetUp() {
-            vm = new VendingMachine();
+            vm = new VendingMachine.VendingMachine();
         }
 
         #region Display
