@@ -83,5 +83,17 @@ namespace VendingMachine_Tests {
             Assert.AreEqual(100, vm.CoinReturn()[1].millimeters);
         }
         #endregion
+
+        #region SelectProduct
+        [Test]
+        public void DispensesProductWhenFundsSufficient() {
+            vm.InsertCoin(Coin.quarter);
+            vm.InsertCoin(Coin.quarter);
+            vm.SelectProduct(ProductType.chips);
+            List<Product> dispensedProducts = vm.DispenseProducts();
+            Assert.AreEqual(1, dispensedProducts.Count);
+            Assert.AreEqual(ProductType.chips, dispensedProducts[0].type);
+        }
+        #endregion
     }
 }

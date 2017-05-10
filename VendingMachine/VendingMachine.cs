@@ -25,6 +25,14 @@ namespace VendingMachine {
             inventory.AddProducts(products);
         }
 
+        public void SelectProduct(ProductType productType) {
+
+        }
+
+        public List<Product> DispenseProducts() {
+            return null;
+        }
+
         public string Display() {
             if (cents == 0) {
                 return "INSERT COIN";
