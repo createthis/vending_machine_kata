@@ -57,5 +57,9 @@ namespace VendingMachine {
         public int AmountInserted() {
             return cents;
         }
+
+        public List<Coin> CoinReturn() {
+            return returnedCoins;
+        }
     }
 }
