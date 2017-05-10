@@ -14,14 +14,14 @@ namespace VendingMachine_Tests {
 
         #region Display
         [Test]
-        public void displaysInsertCoinWhenNoCoinsInserted() {
+        public void DisplaysInsertCoinWhenNoCoinsInserted() {
             Assert.AreEqual("INSERT COIN", vm.Display());
         }
         #endregion
 
         #region InsertCoin
         [Test]
-        public void addingValidCoinChangesAmount() {
+        public void AddingValidCoinChangesAmount() {
             vm.InsertCoin(Coin.dime);
             Assert.AreEqual(10, vm.AmountInserted());
         }
