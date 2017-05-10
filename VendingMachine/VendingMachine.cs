@@ -30,7 +30,7 @@ namespace VendingMachine {
         }
 
         private bool SufficientFunds(ProductType productType) {
-            return productPrices[productType] >= cents;
+            return cents >= productPrices[productType];
         }
 
         private bool HasStockRemaining(ProductType productType) {
