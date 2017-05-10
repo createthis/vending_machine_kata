@@ -103,6 +103,14 @@ namespace VendingMachine_Tests {
             Assert.AreEqual(1, dispensedProducts.Count);
             Assert.AreEqual(ProductType.chips, dispensedProducts[0].type);
         }
+
+        [Test]
+        public void DoesNotDispenseProductWhenFundsInsufficient() {
+            vm.InsertCoin(Coin.quarter);
+            vm.SelectProduct(ProductType.chips);
+            List<Product> dispensedProducts = vm.DispenseProducts();
+            Assert.AreEqual(0, dispensedProducts.Count);
+        }
         #endregion
     }
 }
