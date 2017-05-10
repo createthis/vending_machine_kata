@@ -70,7 +70,7 @@ namespace VendingMachine {
             if (cents == 0) {
                 return "INSERT COIN";
             }
-            return cents + " Cents";
+            return cents + " CENTS";
         }
 
         private int CoinToCents(Coin coin) {

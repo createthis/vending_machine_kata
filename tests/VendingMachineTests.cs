@@ -44,17 +44,25 @@ namespace VendingMachine_Tests {
         }
 
         [Test]
+        public void DisplaysPriceWhenProductSelectedAndFundsInsufficient() {
+            vm.InsertCoin(Coin.quarter);
+            vm.SelectProduct(ProductType.chips);
+            Assert.AreEqual("PRICE 50 CENTS", vm.Display());
+            Assert.AreEqual("25 CENTS", vm.Display());
+        }
+
+        [Test]
         public void DisplaysTotalAmountWhenCoinsInserted() {
             vm.InsertCoin(Coin.dime);
-            Assert.AreEqual("10 Cents", vm.Display());
+            Assert.AreEqual("10 CENTS", vm.Display());
             vm.InsertCoin(Coin.dime);
-            Assert.AreEqual("20 Cents", vm.Display());
+            Assert.AreEqual("20 CENTS", vm.Display());
             vm.InsertCoin(Coin.nickel);
-            Assert.AreEqual("25 Cents", vm.Display());
+            Assert.AreEqual("25 CENTS", vm.Display());
             vm.InsertCoin(Coin.quarter);
-            Assert.AreEqual("50 Cents", vm.Display());
+            Assert.AreEqual("50 CENTS", vm.Display());
             vm.InsertCoin(Coin.penny);
-            Assert.AreEqual("50 Cents", vm.Display());
+            Assert.AreEqual("50 CENTS", vm.Display());
         }
         #endregion
 
