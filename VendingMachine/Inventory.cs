@@ -12,15 +12,22 @@ namespace VendingMachine {
             }
         }
 
-        public void AddProducts(List<Product> products) {
+        public void Add(List<Product> products) {
             foreach (Product product in products) {
-                AddProduct(product);
+                Add(product);
             }
         }
 
-        public void AddProduct(Product product) {
+        public void Add(Product product) {
             List<Product> products = inventory[product.type];
             products.Add(product);
+        }
+
+        public Product Shift(ProductType productType) {
+            List<Product> products = inventory[productType];
+            Product product = products[0];
+            products.Remove(product);
+            return product;
         }
 
         public int Count(ProductType productType) {

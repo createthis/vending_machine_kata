@@ -35,6 +35,15 @@ namespace VendingMachine_Tests {
         }
 
         [Test]
+        public void DisplaysThankYouWhenProductSelectedAndFundsSufficient() {
+            vm.InsertCoin(Coin.quarter);
+            vm.InsertCoin(Coin.quarter);
+            vm.SelectProduct(ProductType.chips);
+            Assert.AreEqual("THANK YOU", vm.Display());
+            Assert.AreEqual("INSERT COIN", vm.Display());
+        }
+
+        [Test]
         public void DisplaysTotalAmountWhenCoinsInserted() {
             vm.InsertCoin(Coin.dime);
             Assert.AreEqual("10 Cents", vm.Display());

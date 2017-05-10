@@ -7,12 +7,16 @@ namespace VendingMachine {
         private List<Coin> returnedCoins;
         private Inventory inventory;
         private Dictionary<ProductType, int> productPrices;
+        private List<Product> productsToDispense;
+        private bool thankYou;
 
         public VendingMachine() {
             cents = 0;
             returnedCoins = new List<Coin>();
             inventory = new Inventory();
             productPrices = new Dictionary<ProductType, int>();
+            productsToDispense = new List<Product>();
+            thankYou = false;
         }
 
         public void SetPrices(List<ProductPrice> productPrices) {
@@ -22,18 +26,47 @@ namespace VendingMachine {
         }
 
         public void Stock(List<Product> products) {
-            inventory.AddProducts(products);
+            inventory.Add(products);
+        }
+
+        private bool SufficientFunds(ProductType productType) {
+            return productPrices[productType] >= cents;
+        }
+
+        private bool HasStockRemaining(ProductType productType) {
+            return inventory.Count(productType) > 0;
+        }
+
+        private bool Selectable(ProductType productType) {
+            return SufficientFunds(productType) && HasStockRemaining(productType);
+        }
+
+        private void DispenseProduct(ProductType productType) {
+            productsToDispense.Add(inventory.Shift(productType));
+            cents -= productPrices[productType];
+            thankYou = true;
         }
 
         public void SelectProduct(ProductType productType) {
-
+            if (Selectable(productType)) {
+                DispenseProduct(productType);
+            }
         }
 
         public List<Product> DispenseProducts() {
-            return null;
+            List<Product> products = new List<Product>();
+            foreach (Product product in productsToDispense) {
+                products.Add(product);
+            }
+            productsToDispense.Clear();
+            return products;
         }
 
         public string Display() {
+            if (thankYou) {
+                thankYou = false;
+                return "THANK YOU";
+            }
             if (cents == 0) {
                 return "INSERT COIN";
             }
