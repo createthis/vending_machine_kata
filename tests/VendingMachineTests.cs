@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using VendingMachine;
 
@@ -10,6 +11,21 @@ namespace VendingMachine_Tests {
         [SetUp]
         public void SetUp() {
             vm = new VendingMachine.VendingMachine();
+            List<ProductPrice> productPrices = new List<ProductPrice> {
+                new ProductPrice(ProductType.cola, 100),
+                new ProductPrice(ProductType.chips, 50),
+                new ProductPrice(ProductType.candy, 65)
+            };
+            vm.SetPrices(productPrices);
+            List<Product> products = new List<Product>{
+                Product.candy,
+                Product.candy,
+                Product.candy,
+                Product.chips,
+                Product.chips,
+                Product.cola
+            };
+            vm.Stock(products);
         }
 
         #region Display

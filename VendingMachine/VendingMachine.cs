@@ -5,10 +5,24 @@ namespace VendingMachine {
     public class VendingMachine {
         private int cents;
         private List<Coin> returnedCoins;
+        private Inventory inventory;
+        private Dictionary<ProductType, int> productPrices;
 
         public VendingMachine() {
             cents = 0;
             returnedCoins = new List<Coin>();
+            inventory = new Inventory();
+            productPrices = new Dictionary<ProductType, int>();
+        }
+
+        public void SetPrices(List<ProductPrice> productPrices) {
+            foreach (ProductPrice productPrice in productPrices) {
+                this.productPrices.Add(productPrice.type, productPrice.cents);
+            }
+        }
+
+        public void Stock(List<Product> products) {
+            inventory.AddProducts(products);
         }
 
         public string Display() {
