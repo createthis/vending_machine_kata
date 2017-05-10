@@ -9,6 +9,7 @@ namespace VendingMachine {
         private Dictionary<ProductType, int> productPrices;
         private List<Product> productsToDispense;
         private bool thankYou;
+        private int insufficientFunds;
 
         public VendingMachine() {
             cents = 0;
@@ -17,6 +18,7 @@ namespace VendingMachine {
             productPrices = new Dictionary<ProductType, int>();
             productsToDispense = new List<Product>();
             thankYou = false;
+            insufficientFunds = -1;
         }
 
         public void SetPrices(List<ProductPrice> productPrices) {
@@ -50,6 +52,10 @@ namespace VendingMachine {
         public void SelectProduct(ProductType productType) {
             if (Selectable(productType)) {
                 DispenseProduct(productType);
+            } else {
+                if (!SufficientFunds(productType)) {
+                    insufficientFunds = productPrices[productType];
+                }
             }
         }
 
@@ -63,6 +69,11 @@ namespace VendingMachine {
         }
 
         public string Display() {
+            if (insufficientFunds != -1) {
+                string message = "PRICE " + insufficientFunds + " CENTS";
+                insufficientFunds = -1;
+                return message;
+            }
             if (thankYou) {
                 thankYou = false;
                 return "THANK YOU";
